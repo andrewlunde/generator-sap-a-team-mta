@@ -1,0 +1,39 @@
+# https://sap.github.io/jenkins-library/
+general:
+  gitSshKeyCredentialsId: '<%= github_creds %>'
+  collectTelemetryData: false
+steps:
+  setupCommonPipelineEnvironment:
+    collectTelemetryData: true
+  mtaBuild:
+    buildTarget: 'CF'
+    mtaBuildTool: 'cloudMbt'
+    platform: 'cf'
+    defaultNpmRegistry: 'https://registry.npmjs.org/'
+    cloudMbt:
+      dockerImage: '<%= build_image %>'
+    #dockerBasedModules: ['conciletime-cli']
+    #postBuildAction: 'mbt --version'
+  # https://github.wdf.sap.corp/pages/ContinuousDelivery/piper-doc/steps/cloudFoundryDeploy/
+  cloudFoundryDeploy:
+    verbose: true
+    deployTool: 'mtaDeployPlugin'
+    #deployTool: 'cf_native'
+    deployType: 'standard'
+    cloudFoundry:
+      apiEndpoint: '<%= cf_deploy_api %>'
+      org: '<%= cf_deploy_org %>'
+      space: '<%= cf_deploy_space %>'
+      credentialsId: '<%= cf_deploy_creds %>'
+      dockerImage: '<%= deploy_image %>'
+      dockerWorkspace: '/home/jenkins/piper'
+    mtaDeployParameters: '<%= deploy_params %>'
+#  xsaDeploy:
+#    XSA:
+#      apiEndpoint: '<%= cf_deploy_api %>'
+#      org: '<%= cf_deploy_org %>'
+#      space: '<%= cf_deploy_space %>'
+#      credentialsId: '<%= cf_deploy_creds %>'
+  slackSendNotification:
+    credentialsId: '<%= slack_creds %>'
+    channel: '<%= slack_channel %>s'

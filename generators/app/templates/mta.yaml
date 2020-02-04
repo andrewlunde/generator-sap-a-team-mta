@@ -1,0 +1,30 @@
+ID: <%= app_name %>
+_schema-version: '2.1'
+description: <%= app_desc %>
+version: 0.0.1
+
+modules:
+
+### New Modules Here ###
+
+ - name: <%= router_name %>
+   type: html5
+   path: <%= router_dir %>
+   parameters:
+      disk-quota: 256M
+      memory: 256M
+   requires:
+    - name: <%= uaa_res_name %>
+   ### New Destinations Here ###
+
+resources:
+
+### New Resources Here ###
+
+ - name: <%= uaa_res_name %>
+   parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+      service-name: <%= uaa_svc_name %>
+   type: org.cloudfoundry.managed-service
