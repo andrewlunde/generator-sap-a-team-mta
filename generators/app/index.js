@@ -57,13 +57,19 @@ module.exports = class extends Generator {
     this.log(
       yosay(
         `Welcome to the awesome ${chalk.red(
-          "generator-sap-a-team-mta-base"
+          "SAP A-Team MTA"
         )} generator!`
       )
     );
 
-    this.log(`Add a Docker based module with "yo sap-a-team-mta-base:docker-module"`);
-    this.log(`Add a Jenkins support with "yo sap-a-team-mta-base:jenkins"`);
+    this.log(`Add Jenkins support with "yo sap-a-team-mta:jenkins"`);
+    this.log(`Add a HDB-style HDI container with "yo sap-a-team-mta:db-hdb"`);
+    this.log(`Add a CAP-style HDI container with "yo sap-a-team-cap:db-hdb"`);
+    this.log(`Add a HANA SecureStore with "yo sap-a-team-cap:db-ss"`);
+    this.log(`Add a NodeJS based module with "yo sap-a-team-mta:module-nodejs"`);
+    this.log(`Add a Java based module with "yo sap-a-team-mta:module-java"`);
+    this.log(`Add a Python based module with "yo sap-a-team-mta:module-python"`);
+    this.log(`Add a Docker based module with "yo sap-a-team-mta:module-docker"`);
 
     const prompts = [
       {
@@ -185,10 +191,16 @@ module.exports = class extends Generator {
   }
 
   end() {
-    this.log(`Your project is ready.  Change into it with "cd ${this.answers.project_name}"`);
+    this.log(`Add Jenkins support with "yo sap-a-team-mta:jenkins"`);
+    this.log(`Add a HDB-style HDI container with "yo sap-a-team-mta:db-hdb"`);
+    this.log(`Add a CAP-style HDI container with "yo sap-a-team-cap:db-hdb"`);
+    this.log(`Add a HANA SecureStore with "yo sap-a-team-cap:db-ss"`);
+    this.log(`Add a NodeJS based module with "yo sap-a-team-mta:module-nodejs"`);
+    this.log(`Add a Java based module with "yo sap-a-team-mta:module-java"`);
+    this.log(`Add a Python based module with "yo sap-a-team-mta:module-python"`);
+    this.log(`Add a Docker based module with "yo sap-a-team-mta:module-docker"`);
+    this.log(`\nYour project is ready.  Change into it with "cd ${this.answers.project_name}"`);
     this.log(`Build+Deploy : "cd ${this.answers.project_name} ; mkdir -p target ; mbt build -p=cf -t=target --mtar=${this.answers.project_name}.mtar ; cf deploy target/${this.answers.project_name}.mtar -f"`);
     this.log(`UnDeploy : "cf undeploy ${this.answers.app_name} -f --delete-services"`);
-    this.log(`Add a Docker based module with "cd ${this.answers.project_name} ; yo sap-a-team-mta-base:docker-module"`);
-    this.log(`Add a Jenkins support with "cd ${this.answers.project_name} ; yo sap-a-team-mta-base:jenkins"`);
   }
 };
