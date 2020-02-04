@@ -31,6 +31,7 @@ yo sap-a-team-mta:db-ss         ; echo "HANA SecureStore"
 yo sap-a-team-mta:module-nodejs ; echo "New NodeJS Module"
 yo sap-a-team-mta:module-java   ; echo "New Java Module"
 yo sap-a-team-mta:module-python ; echo "New Python Module"
+yo sap-a-team-mta:module-docker ; echo "New Docker Module"
 ```
 
 If you git clone this repo, get it to show up in Yeoman by using npm link from the repo directory. (sudo if perm issues)
