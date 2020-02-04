@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Andrew Lunde",
+      "authorEmail": "andrew.lunde@sap.com",
+      "authorUrl": "https://github.com/alundesap"
+    }
+  }
+}
