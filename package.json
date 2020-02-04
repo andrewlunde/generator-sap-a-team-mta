@@ -1,6 +1,6 @@
 {
   "name": "generator-sap-a-team-mta",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "SAP A-Team MTA Project",
   "homepage": "https://github.com/alundesap/generator-sap-a-team-mta",
   "author": {
@@ -77,6 +77,9 @@
     "pretest": "eslint .",
     "test": "jest"
   },
-  "repository": "git@github.com:alundesap/generator-sap-a-team-mta-base.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alundesap/generator-sap-a-team-mta"
+  }
   "license": "MIT"
 }
