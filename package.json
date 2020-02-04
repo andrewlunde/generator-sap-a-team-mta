@@ -80,6 +80,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/alundesap/generator-sap-a-team-mta"
-  }
+  },
   "license": "MIT"
 }
