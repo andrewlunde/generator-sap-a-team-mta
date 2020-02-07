@@ -7,10 +7,10 @@ First, install [Yeoman](http://yeoman.io) and generator-sap-a-team-mta using [np
 
 ```bash
 npm install -g yo
-npm install -g generator-sap-a-team-mta (not until this generator is published on the npmjs.org repository)
+npm install -g generator-sap-a-team-mta
 ```
 
-Create additional subgenerators
+Create additional subgenerators (For Andrew Only)
 ```bash
 yo generator:subgenerator module-php
 ```
