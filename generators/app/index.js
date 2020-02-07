@@ -1,3 +1,11 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-redeclare */
+/* eslint-disable no-useless-concat */
+/* eslint-disable block-scoped-var */
+/* eslint-disable no-template-curly-in-string */
+/* eslint-disable spaced-comment */
+/* eslint-disable camelcase */
+/* eslint-disable capitalized-comments */
 "use strict";
 const Generator = require("yeoman-generator");
 const chalk = require("chalk");
@@ -5,35 +13,35 @@ const yosay = require("yosay");
 const path = require("path");
 const mkdirp = require("mkdirp");
 
-function makeProjectName(name) {
-  name = _.kebabCase(name);
-  return name;
-}
+// function makeProjectName(name) {
+//   name = _.kebabCase(name);
+//   return name;
+// }
 
-function suggest_router_name(so_far) { 
+function suggest_router_name(so_far) {
   //return JSON.stringify(so_far);
   var retstr = "";
-  
+
   retstr += so_far.app_name + "-web";
-  
+
   return retstr;
 }
 
-function suggest_uaa_res_name(so_far) { 
+function suggest_uaa_res_name(so_far) {
   //return JSON.stringify(so_far);
   var retstr = "";
-  
+
   retstr += so_far.app_name + "-uaa";
-  
+
   return retstr;
 }
 
-function suggest_uaa_svc_name(so_far) { 
+function suggest_uaa_svc_name(so_far) {
   //return JSON.stringify(so_far);
   var retstr = "";
-  
+
   retstr += so_far.app_name.toUpperCase() + "_UAA";
-  
+
   return retstr;
 }
 
@@ -55,33 +63,39 @@ module.exports = class extends Generator {
   async prompting() {
     // Have Yeoman greet the user.
     this.log(
-      yosay(
-        `Welcome to the awesome ${chalk.red(
-          "SAP A-Team MTA"
-        )} generator!`
-      )
+      yosay(`Welcome to the awesome ${chalk.red("SAP A-Team MTA")} generator!`)
     );
 
-    this.log(`After you've generated your base MTA project you can enhance it with the following subgenerators.`);
+    this.log(
+      `After you've generated your base MTA project you can enhance it with the following subgenerators.`
+    );
     this.log(``);
     this.log(`Add Jenkins support with           "yo sap-a-team-mta:jenkins"`);
     this.log(`Add a HDB-style HDI container with "yo sap-a-team-mta:db-hdb"`);
     this.log(`Add a CAP-style HDI container with "yo sap-a-team-mta:db-cap"`);
     this.log(`Add a HANA SecureStore with        "yo sap-a-team-mta:db-ss"`);
-    this.log(`Add a NodeJS based module with     "yo sap-a-team-mta:module-nodejs"`);
-    this.log(`Add a Java based module with       "yo sap-a-team-mta:module-java"`);
-    this.log(`Add a Python based module with     "yo sap-a-team-mta:module-python"`);
-    this.log(`Add a Docker based module with     "yo sap-a-team-mta:module-docker"`);
+    this.log(
+      `Add a NodeJS based module with     "yo sap-a-team-mta:module-nodejs"`
+    );
+    this.log(
+      `Add a Java based module with       "yo sap-a-team-mta:module-java"`
+    );
+    this.log(
+      `Add a Python based module with     "yo sap-a-team-mta:module-python"`
+    );
+    this.log(
+      `Add a Docker based module with     "yo sap-a-team-mta:module-docker"`
+    );
     this.log(``);
 
-    const prompts = [
-      {
-        type: "confirm",
-        name: "someAnswer",
-        message: "Would you like to enable this option?",
-        default: true
-      }
-    ];
+    // const prompts = [
+    //   {
+    //     type: "confirm",
+    //     name: "someAnswer",
+    //     message: "Would you like to enable this option?",
+    //     default: true
+    //   }
+    // ];
 
     /*
     Return this.prompt(prompts).then(props => {
@@ -134,7 +148,6 @@ module.exports = class extends Generator {
         message: "UAA service name",
         default: suggest_uaa_svc_name
       }
-
     ]);
   }
 
@@ -173,20 +186,47 @@ module.exports = class extends Generator {
       uaa_svc_name: this.answers.uaa_svc_name
     };
 
-    this.fs.copyTpl(this.templatePath('README.md'),this.destinationPath('README.md'),subs);
-    
-    this.fs.copy(this.templatePath('.gitignore'),this.destinationPath('.gitignore'));
+    this.fs.copyTpl(
+      this.templatePath("README.md"),
+      this.destinationPath("README.md"),
+      subs
+    );
 
-    this.fs.copyTpl(this.templatePath('mta.yaml'),this.destinationPath('mta.yaml'),subs);
+    this.fs.copy(
+      this.templatePath(".gitignore"),
+      this.destinationPath(".gitignore")
+    );
 
-    this.fs.copy( this.templatePath('web/package.json'), this.destinationPath(this.answers.router_dir + '/package.json'));
-    this.fs.copy( this.templatePath('web/xs-app.json'), this.destinationPath(this.answers.router_dir + '/xs-app.json'));
-    this.fs.copyTpl(this.templatePath('web/resources/index.html'),this.destinationPath(this.answers.router_dir + '/resources/index.html'),subs);
+    this.fs.copyTpl(
+      this.templatePath("mta.yaml"),
+      this.destinationPath("mta.yaml"),
+      subs
+    );
 
-    this.fs.copy(this.templatePath('web/resources/favicon.ico'),this.destinationPath(this.answers.router_dir + '/resources/favicon.ico'));
+    this.fs.copy(
+      this.templatePath("web/package.json"),
+      this.destinationPath(this.answers.router_dir + "/package.json")
+    );
+    this.fs.copy(
+      this.templatePath("web/xs-app.json"),
+      this.destinationPath(this.answers.router_dir + "/xs-app.json")
+    );
+    this.fs.copyTpl(
+      this.templatePath("web/resources/index.html"),
+      this.destinationPath(this.answers.router_dir + "/resources/index.html"),
+      subs
+    );
 
-    this.fs.copyTpl(this.templatePath('xs-security.json'),this.destinationPath('xs-security.json'),subs);
+    this.fs.copy(
+      this.templatePath("web/resources/favicon.ico"),
+      this.destinationPath(this.answers.router_dir + "/resources/favicon.ico")
+    );
 
+    this.fs.copyTpl(
+      this.templatePath("xs-security.json"),
+      this.destinationPath("xs-security.json"),
+      subs
+    );
   }
 
   install() {
@@ -198,13 +238,27 @@ module.exports = class extends Generator {
     this.log(`Add a HDB-style HDI container with "yo sap-a-team-mta:db-hdb"`);
     this.log(`Add a CAP-style HDI container with "yo sap-a-team-mta:db-cap"`);
     this.log(`Add a HANA SecureStore with        "yo sap-a-team-mta:db-ss"`);
-    this.log(`Add a NodeJS based module with     "yo sap-a-team-mta:module-nodejs"`);
-    this.log(`Add a Java based module with       "yo sap-a-team-mta:module-java"`);
-    this.log(`Add a Python based module with     "yo sap-a-team-mta:module-python"`);
-    this.log(`Add a Docker based module with     "yo sap-a-team-mta:module-docker"`);
+    this.log(
+      `Add a NodeJS based module with     "yo sap-a-team-mta:module-nodejs"`
+    );
+    this.log(
+      `Add a Java based module with       "yo sap-a-team-mta:module-java"`
+    );
+    this.log(
+      `Add a Python based module with     "yo sap-a-team-mta:module-python"`
+    );
+    this.log(
+      `Add a Docker based module with     "yo sap-a-team-mta:module-docker"`
+    );
     this.log(``);
-    this.log(`\nYour project is ready.  Change into it with "cd ${this.answers.project_name}"`);
-    this.log(`Build+Deploy : "cd ${this.answers.project_name} ; mkdir -p target ; mbt build -p=cf -t=target --mtar=${this.answers.project_name}.mtar ; cf deploy target/${this.answers.project_name}.mtar -f"`);
-    this.log(`UnDeploy : "cf undeploy ${this.answers.app_name} -f --delete-services"`);
+    this.log(
+      `\nYour project is ready.  Change into it with "cd ${this.answers.project_name}"`
+    );
+    this.log(
+      `Build+Deploy : "cd ${this.answers.project_name} ; mkdir -p target ; mbt build -p=cf -t=target --mtar=${this.answers.project_name}.mtar ; cf deploy target/${this.answers.project_name}.mtar -f"`
+    );
+    this.log(
+      `UnDeploy : "cf undeploy ${this.answers.app_name} -f --delete-services"`
+    );
   }
 };
