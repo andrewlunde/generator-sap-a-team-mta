@@ -28,8 +28,14 @@ module.exports = class extends Generator {
   initializing() {
     this.props = {};
     this.answers = {};
+
+    var the_app_name = "";
+    if (typeof(this.config.get("app_name")) !== "undefined") {
+      the_app_name = this.config.get("app_name");
+    }
+
     this.config.defaults({ 
-      docker_module_name: "doc_mod-cli",
+      docker_module_name: the_app_name + "-doc",
       docker_module_img: "alunde/cf-cli:latest",
       docker_module_route: "cf-cli"
     });    
@@ -168,8 +174,8 @@ module.exports = class extends Generator {
 
     //var provides_api = get_provides_api(the_app_name);
     //var provides_api = "provide_this";
-    var provides_api = the_app_name + "_api";
-    var requires_dest = the_app_name + "_be";
+    var provides_api = the_app_name + "_doc_api";
+    var requires_dest = the_app_name + "_doc_be";
 
     this.log("Using provides_api: " + provides_api);
     this.log("Using requires_dest: " + requires_dest);
@@ -389,7 +395,7 @@ module.exports = class extends Generator {
 
   install() {
     // this.installDependencies();
-    this.log("Double check your mta.yaml file.");
+    this.log("Double check your mta.yaml file.\nWARNING: You must use MBT version >1.0.9 for docker modules.");
   }
 
   end() {

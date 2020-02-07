@@ -5,5 +5,14 @@
       "authorEmail": "andrew.lunde@sap.com",
       "authorUrl": "https://github.com/alundesap"
     }
+  },
+  "generator-sap-a-team-mta": {
+    "project_name": "generator sap a team mta",
+    "app_name": "app",
+    "app_desc": "App Description",
+    "router_name": "web",
+    "router_dir": "web",
+    "uaa_res_name": "app-uaa",
+    "uaa_svc_name": "APP_UAA"
   }
 }
