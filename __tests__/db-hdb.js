@@ -1,7 +1,7 @@
 /* eslint-disable capitalized-comments */
 "use strict";
 // const path = require("path");
-const assert = require("yeoman-assert");
+// const assert = require("yeoman-assert");
 // const helpers = require("yeoman-test");
 
 describe("generator-sap-a-team-mta:db-hdb", () => {
@@ -10,8 +10,7 @@ describe("generator-sap-a-team-mta:db-hdb", () => {
   //     .run(path.join(__dirname, "../generators/db-hdb"))
   //     .withPrompts({ someAnswer: true });
   // });
-
-  it("creates files", () => {
-    assert.file(["dummyfile.txt"]);
-  });
+  // it("creates files", () => {
+  //   assert.file(["dummyfile.txt"]);
+  // });
 });
