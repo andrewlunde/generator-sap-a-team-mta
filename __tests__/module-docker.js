@@ -1,14 +1,15 @@
+/* eslint-disable capitalized-comments */
 "use strict";
-const path = require("path");
+// const path = require("path");
 const assert = require("yeoman-assert");
-const helpers = require("yeoman-test");
+// const helpers = require("yeoman-test");
 
 describe("generator-sap-a-team-mta:module-docker", () => {
-  beforeAll(() => {
-    return helpers
-      .run(path.join(__dirname, "../generators/module-docker"))
-      .withPrompts({ someAnswer: true });
-  });
+  // beforeAll(() => {
+  //   return helpers
+  //     .run(path.join(__dirname, "../generators/module-docker"))
+  //     .withPrompts({ someAnswer: true });
+  // });
 
   it("creates files", () => {
     assert.file(["dummyfile.txt"]);
