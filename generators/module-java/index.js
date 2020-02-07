@@ -1,20 +1,32 @@
-'use strict';
-const Generator = require('yeoman-generator');
-const chalk = require('chalk');
-const yosay = require('yosay');
+/* eslint-disable no-undef */
+/* eslint-disable no-redeclare */
+/* eslint-disable no-useless-concat */
+/* eslint-disable block-scoped-var */
+/* eslint-disable no-template-curly-in-string */
+/* eslint-disable spaced-comment */
+/* eslint-disable camelcase */
+/* eslint-disable capitalized-comments */
+"use strict";
+const Generator = require("yeoman-generator");
+const chalk = require("chalk");
+const yosay = require("yosay");
 
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
     this.log(
-      yosay(`Welcome to the awesome ${chalk.red('generator-sap-a-team-mta')} generator!`)
+      yosay(
+        `Welcome to the awesome ${chalk.red(
+          "generator-sap-a-team-mta"
+        )} generator!`
+      )
     );
 
     const prompts = [
       {
-        type: 'confirm',
-        name: 'someAnswer',
-        message: 'Would you like to enable this option?',
+        type: "confirm",
+        name: "someAnswer",
+        message: "Would you like to enable this option?",
         default: true
       }
     ];
@@ -27,8 +39,8 @@ module.exports = class extends Generator {
 
   writing() {
     this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+      this.templatePath("dummyfile.txt"),
+      this.destinationPath("dummyfile.txt")
     );
   }
 
