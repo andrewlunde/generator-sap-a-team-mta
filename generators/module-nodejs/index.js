@@ -21,12 +21,12 @@ module.exports = class extends Generator {
     }
 
     this.config.defaults({
-      module_name: the_app_name + "-njs",
-      module_dir: "nodejs",
-      module_api: the_app_name + "_njs_api",
-      module_be: the_app_name + "_njs_be",
+      nodejs_module_name: the_app_name + "-njs",
+      nodejs_module_dir: "nodejs",
+      nodejs_module_api: the_app_name + "_njs_api",
+      nodejs_module_be: the_app_name + "_njs_be",
       router_dir: "web",
-      module_route: "nodejs"
+      nodejs_module_route: "nodejs"
     });
   }
 
@@ -68,37 +68,37 @@ module.exports = class extends Generator {
 
     prompts.push({
       type: "input",
-      name: "module_name",
+      name: "nodejs_module_name",
       message: "NodeJS Module Name.",
-      default: this.config.get("module_name")
+      default: this.config.get("nodejs_module_name")
     });
 
     prompts.push({
       type: "input",
-      name: "module_dir",
+      name: "nodejs_module_dir",
       message: "NodeJS Module Path.",
-      default: this.config.get("module_dir")
+      default: this.config.get("nodejs_module_dir")
     });
 
     prompts.push({
       type: "input",
-      name: "module_api",
+      name: "nodejs_module_api",
       message: "NodeJS Module API (Internal Reference).",
-      default: this.config.get("module_api")
+      default: this.config.get("nodejs_module_api")
     });
 
     prompts.push({
       type: "input",
-      name: "module_be",
+      name: "nodejs_module_be",
       message: "NodeJS Module Back End (AppRouter Destination).",
-      default: this.config.get("module_be")
+      default: this.config.get("nodejs_module_be")
     });
 
     prompts.push({
       type: "input",
-      name: "module_route",
+      name: "nodejs_module_route",
       message: "Route path(after first /) that your module will handle",
-      default: this.config.get("module_route")
+      default: this.config.get("nodejs_module_route")
     });
 
     this.answers = await this.prompt(prompts);
@@ -123,22 +123,22 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    this.config.set("module_name", this.answers.module_name);
-    this.config.set("module_dir", this.answers.module_dir);
-    this.config.set("module_api", this.answers.module_api);
-    this.config.set("module_be", this.answers.module_be);
-    this.config.set("module_route", this.answers.module_route);
+    this.config.set("nodejs_module_name", this.answers.nodejs_module_name);
+    this.config.set("nodejs_module_dir", this.answers.nodejs_module_dir);
+    this.config.set("nodejs_module_api", this.answers.nodejs_module_api);
+    this.config.set("nodejs_module_be", this.answers.nodejs_module_be);
+    this.config.set("nodejs_module_route", this.answers.nodejs_module_route);
     this.config.set("router_dir", this.answers.router_dir);
 
     this.config.save();
 
     var subs = {
       app_name: this.answers.app_name,
-      module_name: this.answers.module_name,
-      module_dir: this.answers.module_dir,
-      module_api: this.answers.module_api,
-      module_be: this.answers.module_be,
-      module_route: this.answers.module_route,
+      nodejs_module_name: this.answers.nodejs_module_name,
+      nodejs_module_dir: this.answers.nodejs_module_dir,
+      nodejs_module_api: this.answers.nodejs_module_api,
+      nodejs_module_be: this.answers.nodejs_module_be,
+      nodejs_module_route: this.answers.nodejs_module_route,
       uaa_res_name: this.answers.uaa_res_name,
       hdi_res_name: ""
     };
@@ -152,23 +152,23 @@ module.exports = class extends Generator {
 
     this.fs.copy(
       this.templatePath("nodejs/.eslintrc"),
-      this.destinationPath(this.answers.module_dir + "/.eslintrc")
+      this.destinationPath(this.answers.nodejs_module_dir + "/.eslintrc")
     );
     this.fs.copy(
       this.templatePath("nodejs/.eslintrc.ext"),
-      this.destinationPath(this.answers.module_dir + "/.eslintrc.ext")
+      this.destinationPath(this.answers.nodejs_module_dir + "/.eslintrc.ext")
     );
     this.fs.copy(
       this.templatePath("nodejs/.gitignore"),
-      this.destinationPath(this.answers.module_dir + "/.gitignore")
+      this.destinationPath(this.answers.nodejs_module_dir + "/.gitignore")
     );
     this.fs.copy(
       this.templatePath("nodejs/package.json"),
-      this.destinationPath(this.answers.module_dir + "/package.json")
+      this.destinationPath(this.answers.nodejs_module_dir + "/package.json")
     );
     this.fs.copy(
       this.templatePath("nodejs/server.js"),
-      this.destinationPath(this.answers.module_dir + "/server.js")
+      this.destinationPath(this.answers.nodejs_module_dir + "/server.js")
     );
 
     this.fs.copy(
@@ -197,16 +197,19 @@ module.exports = class extends Generator {
 
               ins = "";
               ins += "\n\n";
-              ins += indent + " - name: <?= module_name ?>" + "\n";
+              ins += indent + " - name: <?= nodejs_module_name ?>" + "\n";
               ins += indent + "   type: nodejs" + "\n";
-              ins += indent + "   path: <?= module_dir ?>" + "\n";
+              ins += indent + "   path: <?= nodejs_module_dir ?>" + "\n";
               ins += indent + "   parameters:" + "\n";
               ins += indent + "      memory: 512M" + "\n";
               ins += indent + "      disk-quota: 256M" + "\n";
-              ins += indent + "      #host: <?= module_name ?>-${space}" + "\n";
+              ins +=
+                indent +
+                "      #host: <?= nodejs_module_name ?>-${space}" +
+                "\n";
               ins += indent + "      #domain: yourdomain.com" + "\n";
               ins += indent + "   provides:" + "\n";
-              ins += indent + "    - name: <?= module_api ?>" + "\n";
+              ins += indent + "    - name: <?= nodejs_module_api ?>" + "\n";
               ins += indent + "      properties:" + "\n";
               ins += indent + "         url: ${default-url}" + "\n";
               ins += indent + "   requires:" + "\n";
@@ -227,10 +230,10 @@ module.exports = class extends Generator {
               ins = "";
               ins += "\n";
 
-              ins += indent + " - name: <?= module_api ?>" + "\n";
+              ins += indent + " - name: <?= nodejs_module_api ?>" + "\n";
               ins += indent + "   group: destinations" + "\n";
               ins += indent + "   properties:" + "\n";
-              ins += indent + "      name: <?= module_be ?>" + "\n";
+              ins += indent + "      name: <?= nodejs_module_be ?>" + "\n";
               ins += indent + "      url: ~{url}" + "\n";
               ins += indent + "      forwardAuthToken: true";
 
@@ -276,8 +279,11 @@ module.exports = class extends Generator {
 
               ins += indent + "{" + "\n";
               ins +=
-                indent + '  "source": "(<?= module_route ?>/)(.*)",' + "\n";
-              ins += indent + '  "destination": "<?= module_be ?>",' + "\n";
+                indent +
+                '  "source": "(<?= nodejs_module_route ?>/)(.*)",' +
+                "\n";
+              ins +=
+                indent + '  "destination": "<?= nodejs_module_be ?>",' + "\n";
               ins += indent + '  "csrfProtection": true,' + "\n";
               ins += indent + '  "authenticationType": "xsuaa"' + "\n";
               ins += indent + "},";
@@ -324,7 +330,7 @@ module.exports = class extends Generator {
 
               ins +=
                 indent +
-                '<a href="/<?= module_route ?>/">/<?= module_route ?>/</a> link handled by <?= module_name ?><br />' +
+                '<a href="/<?= nodejs_module_route ?>/">/<?= nodejs_module_route ?>/</a> link handled by <?= nodejs_module_name ?><br />' +
                 "\n" +
                 "\n";
 
@@ -354,7 +360,7 @@ module.exports = class extends Generator {
   end() {
     this.log(
       "\n The NodeJS module " +
-        this.answers.module_name +
+        this.answers.nodejs_module_name +
         " has be added to your project. \nDouble check your mta.yaml, " +
         this.answers.router_dir +
         "/xs-app.json" +

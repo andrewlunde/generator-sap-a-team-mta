@@ -1,0 +1,100 @@
+r'''
+    This module provides utilities to get the absolute filenames so that we can be sure that:
+        - The case of a file will match the actual file in the filesystem (otherwise breakpoints won't be hit).
+        - Providing means for the user to make path conversions when doing a remote debugging session in
+          one machine and debugging in another.
+
+    To do that, the PATHS_FROM_ECLIPSE_TO_PYTHON constant must be filled with the appropriate paths.
+
+    @note:
+        in this context, the server is where your python process is running
+        and the client is where eclipse is running.
+
+    E.g.:
+        If the server (your python process) has the structure
+            /user/projects/my_project/src/package/module1.py
+
+        and the client has:
+            c:\my_project\src\package\module1.py
+
+        the PATHS_FROM_ECLIPSE_TO_PYTHON would have to be:
+            PATHS_FROM_ECLIPSE_TO_PYTHON = [(r'c:\my_project\src', r'/user/projects/my_project/src')]
+
+        alternatively, this can be set with an environment variable from the command line:
+           set PATHS_FROM_ECLIPSE_TO_PYTHON=[['c:\my_project\src','/user/projects/my_project/src']]
+
+    @note: DEBUG_CLIENT_SERVER_TRANSLATION can be set to True to debug the result of those translations
+
+    @note: the case of the paths is important! Note that this can be tricky to get right when one machine
+    uses a case-independent filesystem and the other uses a case-dependent filesystem (if the system being
+    debugged is case-independent, 'normcase()' should be used on the paths defined in PATHS_FROM_ECLIPSE_TO_PYTHON).
+
+    @note: all the paths with breakpoints must be translated (otherwise they won't be found in the server)
+
+    @note: to enable remote debugging in the target machine (pydev extensions in the eclipse installation)
+        import pydevd;pydevd.settrace(host, stdoutToServer, stderrToServer, port, suspend)
+
+        see parameter docs on pydevd.py
+
+    @note: for doing a remote debugging session, all the pydevd_ files must be on the server accessible
+        through the PYTHONPATH (and the PATHS_FROM_ECLIPSE_TO_PYTHON only needs to be set on the target
+        machine for the paths that'll actually have breakpoints).
+'''
+
+from _pydevd_bundle.pydevd_constants import IS_PY2, IS_PY3K, DebugInfoHolder, IS_WINDOWS, IS_JYTHON
+from _pydev_bundle._pydev_filesystem_encoding import getfilesystemencoding
+from _pydevd_bundle.pydevd_comm_constants import file_system_encoding, filesystem_encoding_is_utf8
+
+import json
+import os.path
+import sys
+import traceback
+import itertools
+from functools import partial
+
+_os_normcase = os.path.normcase
+basename = os.path.basename
+exists = os.path.exists
+join = os.path.join
+
+try:
+    rPath = os.path.realpath  # @UndefinedVariable
+except:
+    # jython does not support os.path.realpath
+    # realpath is a no-op on systems without islink support
+    rPath = os.path.abspath
+
+# defined as a list of tuples where the 1st element of the tuple is the path in the client machine
+# and the 2nd element is the path in the server machine.
+# see module docstring for more details.
+print('TRY!')
+try:
+    PATHS_FROM_ECLIPSE_TO_PYTHON = json.loads(os.environ.get('PATHS_FROM_ECLIPSE_TO_PYTHON', '[]'))
+except Exception:
+    print('No PATHS_FROM_ECLIPSE_TO_PYTHON...')
+    sys.stderr.write('Error loading PATHS_FROM_ECLIPSE_TO_PYTHON from environment variable.\n')
+    traceback.print_exc()
+    PATHS_FROM_ECLIPSE_TO_PYTHON = []
+else:
+    if not isinstance(PATHS_FROM_ECLIPSE_TO_PYTHON, list):
+        print('PATHS_FROM_ECLIPSE_TO_PYTHON not a list...')
+        sys.stderr.write('Expected PATHS_FROM_ECLIPSE_TO_PYTHON loaded from environment variable to be a list.\n')
+        PATHS_FROM_ECLIPSE_TO_PYTHON = []
+    else:
+        # Converting json lists to tuple
+        print('Convert PATHS_FROM_ECLIPSE_TO_PYTHON to tuple..')
+        PATHS_FROM_ECLIPSE_TO_PYTHON = [tuple(x) for x in PATHS_FROM_ECLIPSE_TO_PYTHON]
+
+# example:
+# PATHS_FROM_ECLIPSE_TO_PYTHON = [
+#  (r'd:\temp\temp_workspace_2\test_python\src\yyy\yyy',
+#   r'd:\temp\temp_workspace_2\test_python\src\hhh\xxx')
+# ]
+
+# cd /home/vcap/deps/0/python/lib/python3.7/site-packages
+
+# vi pydevd_file_utils.py
+
+print('Overriting PATHS_FROM_ECLIPSE_TO_PYTHON..')
+PATHS_FROM_ECLIPSE_TO_PYTHON = [(r'/Users/i830671/git/mta_cfs_boost/python', r'/home/vcap/app')]
+
