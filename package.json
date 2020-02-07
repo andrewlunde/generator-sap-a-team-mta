@@ -1,6 +1,6 @@
 {
   "name": "generator-sap-a-team-mta",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "Yeoman Generator for SAP A-Team MTA Partner Guided Projects",
   "homepage": "https://github.com/alundesap/generator-sap-a-team-mta",
   "author": {
@@ -13,6 +13,11 @@
   ],
   "main": "generators/index.js",
   "keywords": [
+    "yeoman-generator",
+    "generator-sap-a-team-mta",
+    "generator-a-team",
+    "generator-sap",
+    "generator",
     "sap",
     "a-team",
     "sap-a-team",
@@ -20,12 +25,10 @@
     "partner-edge",
     "guided",
     "naïve-sherpa",
-    "a team",
-    "sap a team",
+    "a-team",
+    "sap-a-team",
     "cloudplatform",
-    "hana",
-    "generator",
-    "yeoman-generator"
+    "hana"
   ],
   "devDependencies": {
     "yeoman-test": "^1.7.0",
