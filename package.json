@@ -1,6 +1,6 @@
 {
   "name": "generator-sap-a-team-mta",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Yeoman Generator for SAP A-Team MTA Partner Guided Projects",
   "homepage": "https://github.com/alundesap/generator-sap-a-team-mta",
   "author": {
@@ -43,9 +43,9 @@
     "npm": ">= 4.0.0"
   },
   "dependencies": {
-    "yeoman-generator": "^2.0.1",
-    "chalk": "^2.1.0",
-    "yosay": "^2.0.1"
+    "yeoman-generator": "^4.5.0",
+    "chalk": "^3.0.0",
+    "yosay": "^2.0.2"
   },
   "jest": {
     "testEnvironment": "node"
