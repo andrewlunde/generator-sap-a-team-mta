@@ -25,6 +25,7 @@ Then (optionally) subgenerate additional modules:
 
 ```bash
 yo sap-a-team-mta:jenkins       ; echo "Add Jenkins(Piper) support"
+yo sap-a-team-mta:deploy2xsa    : echo "Add Deploy to XSA extension"
 yo sap-a-team-mta:db-hdb        ; echo "HANA HDB-styled HDI DB"
 yo sap-a-team-mta:db-cap        ; echo "HANA CAP-styled HDI DB"
 yo sap-a-team-mta:db-ss         ; echo "HANA SecureStore"
