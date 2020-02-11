@@ -174,7 +174,7 @@ module.exports = class extends Generator {
 
     this.fs.copyTpl(
       this.templatePath("python/server.py"),
-      this.destinationPath("server.py"),
+      this.destinationPath(this.answers.python_module_dir + "/server.py"),
       subs,
       { delimiter: "?" }
     );
@@ -209,8 +209,8 @@ module.exports = class extends Generator {
               ins += indent + "   type: python" + "\n";
               ins += indent + "   path: <?= python_module_dir ?>" + "\n";
               ins += indent + "   parameters:" + "\n";
-              ins += indent + "      memory: 512M" + "\n";
-              ins += indent + "      disk-quota: 256M" + "\n";
+              ins += indent + "      memory: 256M" + "\n";
+              ins += indent + "      disk-quota: 512M" + "\n";
               ins += indent + "      #host: <?= python_module_name ?>-${space}" + "\n";
               ins += indent + "      #domain: yourdomain.com" + "\n";
               ins += indent + "   provides:" + "\n";

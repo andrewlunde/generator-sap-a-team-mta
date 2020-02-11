@@ -10,7 +10,7 @@ Deploy Command:
 cf deploy target/<%= project_name %>.mtar -f
 ```
 
-UnDeploy Command:
+Undeploy Command:
 ```
 cf undeploy <%= app_name %> -f --delete-services
 ```

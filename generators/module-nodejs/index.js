@@ -201,8 +201,8 @@ module.exports = class extends Generator {
               ins += indent + "   type: nodejs" + "\n";
               ins += indent + "   path: <?= nodejs_module_dir ?>" + "\n";
               ins += indent + "   parameters:" + "\n";
-              ins += indent + "      memory: 512M" + "\n";
-              ins += indent + "      disk-quota: 256M" + "\n";
+              ins += indent + "      memory: 256M" + "\n";
+              ins += indent + "      disk-quota: 512M" + "\n";
               ins +=
                 indent +
                 "      #host: <?= nodejs_module_name ?>-${space}" +

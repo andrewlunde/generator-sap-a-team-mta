@@ -54,8 +54,8 @@ module.exports = class extends Generator {
     // Have Yeoman greet the user.
     this.log(
       yosay(
-        `Welcome to the awesome ${chalk.red(
-          "generator-sap-a-team-mta-base"
+        `Welcome to the ${chalk.red(
+          "generator-sap-a-team-mta:jenkins"
         )} generator!`
       )
     );

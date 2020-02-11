@@ -1,0 +1,10 @@
+_schema-version: '3.1'
+ID: <%= app_name %>-mtaex
+extends: <%= app_name %>
+
+resources:
+
+ - name: <%= uaa_res_name %>
+   parameters:
+      service-plan: default
+      service: xsuaa

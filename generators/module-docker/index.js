@@ -133,6 +133,16 @@ module.exports = class extends Generator {
 
     this.answers = await this.prompt(prompts);
 
+    if (typeof this.config.get("uaa_res_name") !== "undefined") {
+      this.answers.uaa_res_name = this.config.get("uaa_res_name");
+      this.log("Using uaa_res_name: " + this.answers.uaa_res_name);
+    }
+
+    if (typeof this.config.get("hdi_res_name") !== "undefined") {
+      this.answers.hdi_res_name = this.config.get("hdi_res_name");
+      this.log("Using hdi_res_name: " + this.answers.hdi_res_name);
+    }
+
     // this.log("Passed Options app_name:" + JSON.stringify(this.options.app_name));
 
     //    return this.prompt(prompts).then(props => {
@@ -175,8 +185,15 @@ module.exports = class extends Generator {
       docker_module_img: this.answers.docker_module_img,
       docker_module_route: this.answers.docker_module_route,
       provides_api: provides_api,
-      requires_dest: requires_dest
+      requires_dest: requires_dest,
+      uaa_res_name: this.answers.uaa_res_name,
+      hdi_res_name: ""
     };
+
+    if (typeof this.answers.hdi_res_name !== "undefined") {
+      this.log("Requiring to hdi_res_name: " + this.answers.hdi_res_name);
+      subs.hdi_res_name = "\n" + "    - name: " + this.answers.hdi_res_name;
+    }
 
     this.fs.copy(
       this.destinationPath("mta.yaml"),
@@ -212,7 +229,10 @@ module.exports = class extends Generator {
               ins += indent + "   provides:" + "\n";
               ins += indent + "    - name: <?= provides_api ?>" + "\n";
               ins += indent + "      properties:" + "\n";
-              ins += indent + "         url: ${default-url}";
+              ins += indent + "         url: ${default-url}" + "\n";
+              ins += indent + "   requires:" + "\n";
+              ins += indent + "    - name: <?= uaa_res_name ?>";
+              ins += indent + "<?= hdi_res_name ?>";
 
               line += ins;
             }

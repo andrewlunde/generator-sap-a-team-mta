@@ -68,10 +68,9 @@ def attach(port, host):
 def hello_world():
     output = '<strong>Hello World! I am instance ' + str(os.getenv("CF_INSTANCE_INDEX", 0)) + '</strong> Try these links.</br>\n'
     output += '<a href="/env">/env</a><br />\n'
-    output += '<a href="/python/links">/python/links</a><br />\n'
-    output += '<a href="/python/test">/python/test</a><br />\n'
-    output += '<a href="/python/db_only">/python/db_only</a><br />\n'
-    output += '<a href="/auth_python/db_valid">/auth_python/db_valid</a><br />\n'
+    output += '<a href="/<?= python_module_dir ?>/links">/<?= python_module_dir ?>/links</a><br />\n'
+    output += '<a href="/<?= python_module_dir ?>/test">/<?= python_module_dir ?>/test</a><br />\n'
+    output += '<a href="/<?= python_module_dir ?>/db_only">/<?= python_module_dir ?>/db_only</a><br />\n'
 
     return output
     
@@ -94,7 +93,7 @@ def dump_env():
     return output
 
 # Coming through the app-router
-@app.route('/python/links')
+@app.route('/<?= python_module_dir ?>/links')
 def python_links():
     output = '<strong>Hello World!!! I am instance ' + str(os.getenv("CF_INSTANCE_INDEX", 0)) + '</strong> Try these links.</br>\n'
     output += '<a href="/python/test">/python/test</a><br />\n'
@@ -116,11 +115,11 @@ def python_links():
     return output
 
 # If there is a request for a python/test, return Testing message and module's instance number
-@app.route('/python/test')
+@app.route('/<?= python_module_dir ?>/test')
 def unauth_test():
     return 'Python UnAuthorized Test, Hey! <br />\nI am instance ' + str(os.getenv("CF_INSTANCE_INDEX", 0))
 
-@app.route('/python/post', methods=['POST'])
+@app.route('/<?= python_module_dir ?>/post', methods=['POST'])
 def unauth_post():
     output = 'Python Post to DB (Dangerous!). \n'
     output += '\n'
@@ -133,7 +132,7 @@ def unauth_post():
 
     return Response(output, mimetype='application/json' , status=201,)
 
-@app.route('/python/set_env')
+@app.route('/<?= python_module_dir ?>/set_env')
 def set_pyenv():
     output = 'Set Environment variable... <br />\n'
     if request.args.get('PATHS_FROM_ECLIPSE_TO_PYTHON'):
@@ -149,7 +148,7 @@ def set_pyenv():
     #return Response(output, mimetype='text/plain' , status=200,)
     return output
 
-@app.route('/python/env')
+@app.route('/<?= python_module_dir ?>/env')
 def dump_pyenv():
     output = '<pre>Key Environment variables... \n'
     print('env with ' + platform.python_version())
@@ -178,7 +177,7 @@ def dump_pyenv():
     output += '</pre>\n'
     return output
 
-@app.route('/python/attach')
+@app.route('/<?= python_module_dir ?>/attach')
 def do_attach():
     output = '<pre>\n Attaching to debugger... \n'
     output = '\n Double check that you Eclipse Debug Server is listening on port 5678 and the tunnel is connected. \n'
@@ -189,7 +188,7 @@ def do_attach():
     return output
 
 # If there is a request for a python/test2, return Testing message and then check JWT and connect to the data service and retrieve some data
-@app.route('/python/db_only')
+@app.route('/<?= python_module_dir ?>/db_only')
 def unauth_db_only():
     output = 'Python UnAuthorized DB Only. \n'
     #Enable to trigger debugging
