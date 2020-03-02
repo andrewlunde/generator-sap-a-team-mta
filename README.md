@@ -49,6 +49,12 @@ Yeoman looks for generators installed in:
 ```
 cd /usr/local/lib/node_modules/
 ```
+
+In SAP Business Application Studio Dev Space:
+```
+~/.node_modules_global/lib/node_modules/
+```
+
 Now when you run yo, you should see a choice called __Sap A Team Mta Base__
 
 For SAP Application Studio (Beta).  Open a new terminal.
