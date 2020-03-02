@@ -249,7 +249,7 @@ module.exports = class extends Generator {
     this.log(``);
 
     this.log(`\nYour project is ready.  Change into it with "cd ${this.answers.project_name}"`);
-    this.log(`Build+Deploy : "cd ${this.answers.project_name} ; mkdir -p target ; mbt build -p=cf -t=target --mtar=${this.answers.project_name}.mtar ; cf deploy target/${this.answers.project_name}.mtar -f"`);
+    this.log(`Build+Deploy : "cd ${this.answers.project_name} ; mkdir -p mta_archives ; mbt build -p=cf -t=mta_archives --mtar=${this.answers.project_name}.mtar ; cf deploy mta_archives/${this.answers.project_name}.mtar -f"`);
     this.log(`UnDeploy : "cf undeploy ${this.answers.app_name} -f --delete-services"`);
     this.log(`Change into it with "cd ${this.answers.project_name}"`);
   }
