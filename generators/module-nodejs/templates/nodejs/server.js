@@ -14,6 +14,36 @@ var app = express();
 var server = require("http").createServer();
 var port = process.env.PORT || 3000;
 
+app.get("/", function (req, res) {
+
+	var responseStr = "";
+	responseStr += "<!DOCTYPE HTML><html><head><title>ConcileTime</title></head><body><h1><%= nodejs_module_name %></h1><h2>SUCCESS!</h2><br />";
+	responseStr += "<a href=\"/<%= nodejs_module_route %>/links\">The Links page.</a><br />";
+	responseStr += "<a href=\"/\">Return to home page.</a><br />";
+	responseStr += "</body></html>";
+	res.status(200).send(responseStr);
+});
+
+app.get("/<%= nodejs_module_route %>", function (req, res) {
+
+	var responseStr = "";
+	responseStr += "<!DOCTYPE HTML><html><head><title>ConcileTime</title></head><body><h1><%= nodejs_module_name %></h1><h2>SUCCESS!</h2><br />";
+	responseStr += "<a href=\"/<%= nodejs_module_route %>/links\">The Links page.</a><br />";
+	responseStr += "<a href=\"/\">Return to home page.</a><br />";
+	responseStr += "</body></html>";
+	res.status(200).send(responseStr);
+});
+
+app.get("/<%= nodejs_module_route %>/links", function (req, res) {
+
+	var responseStr = "";
+	responseStr += "<!DOCTYPE HTML><html><head><title>ConcileTime</title></head><body><h1><%= nodejs_module_name %></h1><h2>SUCCESS!</h2><br />";
+	responseStr += "<a href=\"/<%= nodejs_module_route %>/links\">Back to Links page.</a><br />";
+	responseStr += "<a href=\"/\">Return to home page.</a><br />";
+	responseStr += "</body></html>";
+	res.status(200).send(responseStr);
+});
+
 server.on("request", app);
 
 server.listen(port, function () {

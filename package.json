@@ -1,7 +1,7 @@
 {
   "name": "generator-sap-a-team-mta",
-  "version": "0.0.7",
-  "description": "Yeoman Generator for SAP A-Team MTA Partner Guided Projects",
+  "version": "0.0.10",
+  "description": "Project Generator for SAP(partneredge.sap.com) A-Team Partner Guided Projects",
   "homepage": "https://github.com/alundesap/generator-sap-a-team-mta",
   "author": {
     "name": "Andrew Lunde",

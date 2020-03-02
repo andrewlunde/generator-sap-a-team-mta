@@ -158,17 +158,18 @@ module.exports = class extends Generator {
       this.templatePath("nodejs/.eslintrc.ext"),
       this.destinationPath(this.answers.nodejs_module_dir + "/.eslintrc.ext")
     );
-    this.fs.copy(
-      this.templatePath("nodejs/.gitignore"),
-      this.destinationPath(this.answers.nodejs_module_dir + "/.gitignore")
-    );
+    // this.fs.copy(
+    //  this.templatePath("nodejs/gitignore"),
+    //  this.destinationPath(this.answers.nodejs_module_dir + "/.gitignore")
+    //);
     this.fs.copy(
       this.templatePath("nodejs/package.json"),
       this.destinationPath(this.answers.nodejs_module_dir + "/package.json")
     );
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath("nodejs/server.js"),
-      this.destinationPath(this.answers.nodejs_module_dir + "/server.js")
+      this.destinationPath(this.answers.nodejs_module_dir + "/server.js"),
+      subs
     );
 
     this.fs.copy(

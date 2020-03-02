@@ -74,12 +74,16 @@ module.exports = class extends Generator {
     this.log(`Add Jenkins support with           "yo sap-a-team-mta:jenkins"`);
     this.log(`Add Deploy to XSA extension with   "yo sap-a-team-mta:deploy2xsa"`);
     this.log(`Add a HDB-style HDI container with "yo sap-a-team-mta:db-hdb"`);
-    this.log(`Add a CAP-style HDI container with "yo sap-a-team-mta:db-cap"`);
+    this.log(`Add a CAP-style HDI container with "* yo sap-a-team-mta:db-cap"`);
     this.log(`Add a HANA SecureStore with        "yo sap-a-team-mta:db-ss"`);
     this.log(`Add a NodeJS based module with     "yo sap-a-team-mta:module-nodejs"`);
     this.log(`Add a Java based module with       "yo sap-a-team-mta:module-java"`);
     this.log(`Add a Python based module with     "yo sap-a-team-mta:module-python"`);
     this.log(`Add a Docker based module with     "yo sap-a-team-mta:module-docker"`);
+    this.log(``);
+    this.log(
+      `* = This module is not yet available or is in developoment.  YMMV.`
+    );
     this.log(``);
 
     // const prompts = [
@@ -168,7 +172,7 @@ module.exports = class extends Generator {
 
     this.config.save();
 
-    // this.fs.copy(this.templatePath('.gitignore'), this.destinationPath('.gitignore'));
+    // this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
 
     var subs = {
       project_name: this.answers.project_name,
@@ -186,10 +190,10 @@ module.exports = class extends Generator {
       subs
     );
 
-    this.fs.copy(
-      this.templatePath(".gitignore"),
-      this.destinationPath(".gitignore")
-    );
+    //this.fs.copy(
+    //  this.templatePath("gitignore"),
+    //  this.destinationPath(".gitignore")
+    //);
 
     this.fs.copyTpl(
       this.templatePath("mta.yaml"),
@@ -228,18 +232,25 @@ module.exports = class extends Generator {
   }
 
   end() {
+    this.log(``);
     this.log(`Add Jenkins support with           "yo sap-a-team-mta:jenkins"`);
     this.log(`Add Deploy to XSA extension with   "yo sap-a-team-mta:deploy2xsa"`);
     this.log(`Add a HDB-style HDI container with "yo sap-a-team-mta:db-hdb"`);
-    this.log(`Add a CAP-style HDI container with "yo sap-a-team-mta:db-cap"`);
+    this.log(`Add a CAP-style HDI container with "* yo sap-a-team-mta:db-cap"`);
     this.log(`Add a HANA SecureStore with        "yo sap-a-team-mta:db-ss"`);
     this.log(`Add a NodeJS based module with     "yo sap-a-team-mta:module-nodejs"`);
     this.log(`Add a Java based module with       "yo sap-a-team-mta:module-java"`);
     this.log(`Add a Python based module with     "yo sap-a-team-mta:module-python"`);
     this.log(`Add a Docker based module with     "yo sap-a-team-mta:module-docker"`);
     this.log(``);
+    this.log(
+      `* = This module is not yet available or is in developoment.  YMMV.`
+    );
+    this.log(``);
+
     this.log(`\nYour project is ready.  Change into it with "cd ${this.answers.project_name}"`);
     this.log(`Build+Deploy : "cd ${this.answers.project_name} ; mkdir -p target ; mbt build -p=cf -t=target --mtar=${this.answers.project_name}.mtar ; cf deploy target/${this.answers.project_name}.mtar -f"`);
     this.log(`UnDeploy : "cf undeploy ${this.answers.app_name} -f --delete-services"`);
+    this.log(`Change into it with "cd ${this.answers.project_name}"`);
   }
 };
