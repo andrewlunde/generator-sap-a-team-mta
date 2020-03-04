@@ -103,7 +103,7 @@ module.exports = class extends Generator {
               ins += "\n\n";
 
               ins += indent + "```" + "\n";
-              ins += indent + "cd <%= project_name %> ; mkdir -p target ; mbt build -p=xsa -t=target --mtar=<%= project_name %>.mtar" + "\n";
+              ins += indent + "cd <%= project_name %> ; mkdir -p mta_archives ; mbt build -p=xsa -t=mta_archives --mtar=<%= project_name %>.mtar" + "\n";
               ins += indent + "```" + "\n";
               ins += indent + "\nBuild Command:" + "\n";
 
@@ -122,7 +122,7 @@ module.exports = class extends Generator {
               ins += "\n";
 
               ins += indent + "```" + "\n";
-              ins += indent + "xs deploy target/<%= project_name %>.mtar -f -e deploy2xsa.mtaext" + "\n";
+              ins += indent + "xs deploy mta_archives/<%= project_name %>.mtar -f -e deploy2xsa.mtaext" + "\n";
               ins += indent + "```" + "\n";
               ins += indent + "\nDeploy Command:" + "\n";
 

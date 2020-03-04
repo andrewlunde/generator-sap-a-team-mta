@@ -2,12 +2,12 @@
 
 Build Command:
 ```
-cd <%= project_name %> ; mkdir -p target ; mbt build -p=cf -t=target --mtar=<%= project_name %>.mtar
+cd <%= project_name %> ; mkdir -p mta_archives ; mbt build -p=cf -t=mta_archives --mtar=<%= project_name %>.mtar
 ```
 
 Deploy Command:
 ```
-cf deploy target/<%= project_name %>.mtar -f
+cf deploy mta_archives/<%= project_name %>.mtar -f
 ```
 
 Undeploy Command:
