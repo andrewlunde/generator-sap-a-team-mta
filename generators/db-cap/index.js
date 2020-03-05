@@ -409,6 +409,54 @@ module.exports = class extends Generator {
       subs,
       { delimiter: "?" }
     );
+
+    this.fs.copy(
+      this.destinationPath(this.answers.router_dir + "/resources/index.html"),
+      this.destinationPath(this.answers.router_dir + "/resources/index.html"),
+      {
+        process: function(content) {
+          // var output = "typeof(content) : " + typeof(content);
+          var output = "";
+          var line = "";
+          var pos = 0;
+          var indent = "";
+          var ins = "";
+
+          var lines = String(content).split("\n");
+          for (var i = 1; i <= lines.length; i++) {
+            line = lines[i - 1];
+            pos = line.search("</body>");
+            if (pos !== -1) {
+              //output += "###indent=" + pos + '\n';
+              ins = "";
+              ins += "\n";
+              indent = "  ";
+
+              ins +=
+                indent +
+                '<a href="/<?= srv_route ?>/">/<?= srv_route ?>/</a> link handled by <?= srv_name ?><br />' +
+                "\n" +
+                '<a href="/<?= srv_route ?>/Authors?$expand=books($select=ID,title)">/<?= srv_route ?>/Authors?$expand=books($select=ID,title)</a> link handled by <?= srv_name ?><br />' +
+                "\n" +
+                "\n";
+
+              line = ins + line;
+            }
+
+            output += line + "\n";
+          }
+
+          return output;
+        }
+      }
+    );
+
+    this.fs.copyTpl(
+      this.destinationPath(this.answers.router_dir + "/resources/index.html"),
+      this.destinationPath(this.answers.router_dir + "/resources/index.html"),
+      subs,
+      { delimiter: "?" }
+    );
   }
 
   install() {
