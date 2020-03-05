@@ -1,0 +1,21 @@
+{
+  "build": {
+    "target": ".",
+    "tasks": [
+      {
+        "for": "hana",
+        "src": "<%= db_dir %>",
+        "options": {
+          "model": ["<%= db_dir %>", "<%= srv_dir %>"]
+        }
+      },
+      {
+        "for": "node-cf",
+        "src": "<%= srv_dir %>",
+        "options": {
+          "model": ["<%= db_dir %>", "<%= srv_dir %>"]
+        }
+      }
+    ]
+  }
+}

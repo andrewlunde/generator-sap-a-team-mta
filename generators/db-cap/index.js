@@ -31,7 +31,7 @@ module.exports = class extends Generator {
       srv_dir: "srv",
       srv_api: the_app_name + "_srv_api",
       srv_be: the_app_name + "_srv_be",
-      srv_route: "odata"
+      srv_route: "catalog"
     });
   }
 
