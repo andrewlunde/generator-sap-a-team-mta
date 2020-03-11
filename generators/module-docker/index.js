@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable no-redeclare */
 /* eslint-disable no-useless-concat */
@@ -44,6 +45,9 @@ module.exports = class extends Generator {
     this.config.defaults({
       docker_module_name: the_app_name + "-doc",
       docker_module_img: "alunde/cf-cli:latest",
+      docker_module_api: the_app_name + "_doc_api",
+      docker_module_be: the_app_name + "_doc_be",
+      router_dir: "web",
       docker_module_route: "cf-cli"
     });
   }
@@ -105,6 +109,20 @@ module.exports = class extends Generator {
       });
     }
 
+    prompts.push({
+      type: "input",
+      name: "docker_module_api",
+      message: "Docker Module API (Internal Reference).",
+      default: this.config.get("docker_module_api")
+    });
+
+    prompts.push({
+      type: "input",
+      name: "docker_module_be",
+      message: "Docker Module Back End (AppRouter Destination).",
+      default: this.config.get("docker_module_be")
+    });
+
     if (typeof this.config.get("router_dir") === "undefined") {
       prompts.push({
         type: "input",
@@ -154,6 +172,8 @@ module.exports = class extends Generator {
   writing() {
     this.config.set("docker_module_name", this.answers.docker_module_name);
     this.config.set("docker_module_img", this.answers.docker_module_img);
+    this.config.set("docker_module_api", this.answers.docker_module_api);
+    this.config.set("docker_module_be", this.answers.docker_module_be);
     this.config.set("docker_module_route", this.answers.docker_module_route);
 
     this.config.save();
@@ -174,18 +194,13 @@ module.exports = class extends Generator {
 
     //var provides_api = get_provides_api(the_app_name);
     //var provides_api = "provide_this";
-    var provides_api = the_app_name + "_doc_api";
-    var requires_dest = the_app_name + "_doc_be";
-
-    this.log("Using provides_api: " + provides_api);
-    this.log("Using requires_dest: " + requires_dest);
 
     var subs = {
       docker_module_name: this.answers.docker_module_name,
       docker_module_img: this.answers.docker_module_img,
+      docker_module_api: this.answers.docker_module_api,
+      docker_module_be: this.answers.docker_module_be,
       docker_module_route: this.answers.docker_module_route,
-      provides_api: provides_api,
-      requires_dest: requires_dest,
       uaa_res_name: this.answers.uaa_res_name,
       hdi_res_name: ""
     };
@@ -227,7 +242,7 @@ module.exports = class extends Generator {
               ins += indent + "      docker:" + "\n";
               ins += indent + "         image: <?= docker_module_img ?>" + "\n";
               ins += indent + "   provides:" + "\n";
-              ins += indent + "    - name: <?= provides_api ?>" + "\n";
+              ins += indent + "    - name: <?= docker_module_api ?>" + "\n";
               ins += indent + "      properties:" + "\n";
               ins += indent + "         url: ${default-url}" + "\n";
               ins += indent + "   requires:" + "\n";
@@ -248,10 +263,10 @@ module.exports = class extends Generator {
               var ins = "";
               ins += "\n";
 
-              ins += indent + " - name: <?= provides_api ?>" + "\n";
+              ins += indent + " - name: <?= docker_module_api ?>" + "\n";
               ins += indent + "   group: destinations" + "\n";
               ins += indent + "   properties:" + "\n";
-              ins += indent + "      name: <?= requires_dest ?>" + "\n";
+              ins += indent + "      name: <?= docker_module_be ?>" + "\n";
               ins += indent + "      url: ~{url}" + "\n";
               ins += indent + "      forwardAuthToken: true";
 
@@ -296,7 +311,8 @@ module.exports = class extends Generator {
                 indent +
                 '  "source": "(<?= docker_module_route ?>/)(.*)",' +
                 "\n";
-              ins += indent + '  "destination": "<?= requires_dest ?>",' + "\n";
+              ins +=
+                indent + '  "destination": "<?= docker_module_be ?>",' + "\n";
               ins += indent + '  "csrfProtection": true,' + "\n";
               ins += indent + '  "authenticationType": "xsuaa"' + "\n";
               ins += indent + "},";
