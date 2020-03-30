@@ -5,7 +5,7 @@
   "repository": "<Add your repository here>",
   "license": "ISC",
   "dependencies": {
-    "@sap/cds": "^3.13.0",
+    "@sap/cds": "^3.31.2",
     "express": "^4.17.1",
     "hdb": "^0.17.1"
   },
@@ -29,6 +29,9 @@
     },
     "odata": {
       "version": "v4"
+    },
+    "hana": {
+      "syntax": "hdi"
     }
   },
   "files": [

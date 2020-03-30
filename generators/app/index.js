@@ -73,8 +73,9 @@ module.exports = class extends Generator {
     this.log(``);
     this.log(`Add Jenkins support with           "yo sap-a-team-mta:jenkins"`);
     this.log(`Add Deploy to XSA extension with   "yo sap-a-team-mta:deploy2xsa"`);
+    this.log(`Add a Manually managed schema with "yo sap-a-team-mta:db-sch"`);
     this.log(`Add a HDB-style HDI container with "yo sap-a-team-mta:db-hdb"`);
-    this.log(`Add a CAP-style HDI container with "* yo sap-a-team-mta:db-cap"`);
+    this.log(`Add a CAP-style HDI container with "yo sap-a-team-mta:db-cap"`);
     this.log(`Add a HANA SecureStore with        "yo sap-a-team-mta:db-ss"`);
     this.log(`Add a NodeJS based module with     "yo sap-a-team-mta:module-nodejs"`);
     this.log(`Add a Java based module with       "yo sap-a-team-mta:module-java"`);
@@ -235,8 +236,9 @@ module.exports = class extends Generator {
     this.log(``);
     this.log(`Add Jenkins support with           "yo sap-a-team-mta:jenkins"`);
     this.log(`Add Deploy to XSA extension with   "yo sap-a-team-mta:deploy2xsa"`);
+    this.log(`Add a Manually managed schema with "yo sap-a-team-mta:db-sch"`);
     this.log(`Add a HDB-style HDI container with "yo sap-a-team-mta:db-hdb"`);
-    this.log(`Add a CAP-style HDI container with "* yo sap-a-team-mta:db-cap"`);
+    this.log(`Add a CAP-style HDI container with "yo sap-a-team-mta:db-cap"`);
     this.log(`Add a HANA SecureStore with        "yo sap-a-team-mta:db-ss"`);
     this.log(`Add a NodeJS based module with     "yo sap-a-team-mta:module-nodejs"`);
     this.log(`Add a Java based module with       "yo sap-a-team-mta:module-java"`);
