@@ -1,23 +1,23 @@
 {
   "name": "generator-sap-a-team-mta",
-  "version": "0.0.13",
+  "version": "0.0.15",
   "description": "Project Generator for SAP(partneredge.sap.com) A-Team Partner Guided Projects",
-  "homepage": "https://github.com/alundesap/generator-sap-a-team-mta",
+  "homepage": "https://github.com/andrewlunde/generator-sap-a-team-mta",
   "author": {
     "name": "Andrew Lunde",
     "email": "andrew.lunde@sap.com",
-    "url": "https://github.com/alundesap"
+    "url": "https://github.com/andrewlunde"
   },
   "files": [
     "generators"
   ],
   "main": "generators/index.js",
   "keywords": [
-    "yeoman-generator",
-    "generator-sap-a-team-mta",
-    "generator-a-team",
-    "generator-sap",
-    "generator",
+    "disabled-yeoman-generator",
+    "disabled-generator-sap-a-team-mta",
+    "disabled-generator-a-team",
+    "disabled-generator-sap",
+    "disabled-generator",
     "sap",
     "a-team",
     "sap-a-team",
@@ -90,7 +90,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/alundesap/generator-sap-a-team-mta"
+    "url": "https://github.com/andrewlunde/generator-sap-a-team-mta"
   },
   "license": "MIT"
 }
